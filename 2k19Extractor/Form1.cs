@@ -224,8 +224,10 @@ namespace _2k19Extractor
                 //Create teams by clearing the team list, designating Home/Away, and supplying the pointer for Number of Players, and Pointer for the starting Center
                 //Adding Away team first so that we can loop through the teams without worrying about Home/Away because Away is always shown first
                 _game.Teams.Clear();
-                _game.Teams.Add(new Team("Away", _baseAddress + 0x5BC4BD8, _baseAddress + 0x5B63038, _baseAddress + 0x51083BC, _baseAddress + 0x5BDDC30, _baseAddress + 0x5BDCE88));
-                _game.Teams.Add(new Team("Home", _baseAddress + 0x5BC4554, _baseAddress + 0x5B63030, _baseAddress + 0x5107564, _baseAddress + 0x5BDBDF8, _baseAddress + 0x5BDB050));
+                //                                              Score                       OnFloor                 Team Name               Num Players               Base Players
+                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C0D5B0, _baseAddress + 0x5B9C7A8, _baseAddress + 0x5141ACC, _baseAddress + 0x5C17530, _baseAddress + 0x5C16788));//num players is base pointer plus DA8
+                //away score could also be 5BFE468 and home 5BFDDE4
+                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C0CEA0, _baseAddress + 0x5B9C7A0, _baseAddress + 0x5140C74, _baseAddress + 0x5C156F8, _baseAddress + 0x5C14950));//num players is base pointer plus DA8
 
                 foreach (var team in _game.Teams)
                 {
@@ -363,7 +365,7 @@ namespace _2k19Extractor
                     
                     //Get Scores
                     var scoreBuffer = new byte[2];
-                    //This address hold the final score each quarter is offset by 58 from this so we will add 58 for each Quarter
+                    //This address hold the final score each quarter is offset by AC from this so we will add AC for each Quarter
                     //We could add all of these to the offset loop instead of getting them individually, but would need to choose how to put them into the score class
                     var scoreAddress = new IntPtr(team.FinalScorePointer);
                     ReadProcessMemory(processHandle, scoreAddress, scoreBuffer, scoreBuffer.Length, out bytesRead);

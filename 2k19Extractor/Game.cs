@@ -27,8 +27,8 @@ namespace _2k19Extractor
                     _lastQuarterWithTime = value;
             }
         }
-        public const Int64 QuarterModifier = 0x511D9F0;
-        public const Int64 SecondsRemainingModifier = 0x5BDA580;
+        public const Int64 QuarterModifier = 0x5157100;
+        public const Int64 SecondsRemainingModifier = 0x5C13E80;
         public const Int64 PlayerWithBallModifier = 0x5BC78C8;
 
         public Int64 QuarterPointer;
