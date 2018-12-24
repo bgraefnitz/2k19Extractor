@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -11,6 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Threading;
+using Newtonsoft.Json;
 
 
 namespace _2k19Extractor
@@ -122,6 +122,7 @@ namespace _2k19Extractor
                             {
                                 //Export box score to file
                                 var liveBoxPath = ExportIndex(exportFilePath, "html", _game.GameTime, null, null);
+                                ExportJson(exportFilePath);
 
                                 //Open the live feeds?
                                 if (firstExport && chkAutoOpen.Checked)
@@ -225,9 +226,8 @@ namespace _2k19Extractor
                 //Adding Away team first so that we can loop through the teams without worrying about Home/Away because Away is always shown first
                 _game.Teams.Clear();
                 //                                              Score                       OnFloor                 Team Name               Num Players               Base Players
-                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C0D5B0, _baseAddress + 0x5B9C7A8, _baseAddress + 0x5141ACC, _baseAddress + 0x5C17530, _baseAddress + 0x5C16788));//num players is base pointer plus DA8
-                //away score could also be 5BFE468 and home 5BFDDE4
-                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C0CEA0, _baseAddress + 0x5B9C7A0, _baseAddress + 0x5140C74, _baseAddress + 0x5C156F8, _baseAddress + 0x5C14950));//num players is base pointer plus DA8
+                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C140B0, _baseAddress + 0x5BA32C0, _baseAddress + 0x514594C, _baseAddress + 0x5C1E030, _baseAddress + 0x5C1D288));//num players is base pointer plus DA8
+                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C139A0, _baseAddress + 0x5BA3278, _baseAddress + 0x5144AF4, _baseAddress + 0x5C1C1F8, _baseAddress + 0x5C1B450));//num players is base pointer plus DA8
 
                 foreach (var team in _game.Teams)
                 {
@@ -675,6 +675,20 @@ namespace _2k19Extractor
             if (fileFormat == "html")
                 playByPlayOutputFile.WriteLine(@"</pre> <a id=""bottom""></a> </body></html>");
             playByPlayOutputFile.Close();
+
+            return filePath;
+        }
+
+        private string ExportJson(string exportFilePath)
+        {
+            //If this is an html file, just use Live.html, if not, use the timestamp and team names in the file name
+            string filePath = exportFilePath + "game.json";
+
+            var jsonOutputFile = new StreamWriter(filePath);
+            
+
+            jsonOutputFile.WriteLine(JsonConvert.SerializeObject(new Export.GameExport(_game)));
+            jsonOutputFile.Close();
 
             return filePath;
         }
