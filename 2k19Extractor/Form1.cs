@@ -99,10 +99,7 @@ namespace _2k19Extractor
                         exportFilePath += @"\";
                     //hold the time of of the last export so that we don't export every time we gather new stats (only on the export frequency)
                     DateTime lastExport = DateTime.Now;
-
-                    //bool to see if it is the first time through, so that we can open the live feeds if the user wants
-                    var firstExport = true;
-
+                    
                     //Loop until the game is over
                     //Should probably thread this and implement cancellation, exit on error, etc.
                     while (!_game.GameEnded)
@@ -121,15 +118,8 @@ namespace _2k19Extractor
                             if (DateTime.Now > lastExport.AddSeconds(_exportFrequency))
                             {
                                 //Export box score to file
-                                var liveBoxPath = ExportIndex(exportFilePath, "html", _game.GameTime, null, null);
                                 ExportJson(exportFilePath);
-
-                                //Open the live feeds?
-                                if (firstExport && chkAutoOpen.Checked)
-                                {
-                                    firstExport = false;
-                                    Process.Start(liveBoxPath);
-                                }
+                                
                                 lastExport = DateTime.Now;
                             }
 
@@ -166,19 +156,13 @@ namespace _2k19Extractor
                         //Get game stats one last time and add any events that occurred since the last time previous game was cloned
                         GetStats(prevGame);
                         _game.GameEvents.AddRange(_game.GameChanges(prevGame));
-
-                        var finalBoxPath = ExportStats(exportFilePath, "txt", _game.GameTime, null, null);
-                        var finalPlayByPlayPath = ExportPlayByPlay(exportFilePath, "txt");
-                        //Export the live files one more time to post the file path
-                        ExportIndex(exportFilePath, "html", _game.GameTime, finalBoxPath, finalPlayByPlayPath);
+                        
+                        ExportJson(exportFilePath);
                     }
                     catch
                     {
                         Thread.Sleep(60000);
-                        var finalBoxPath = ExportStats(exportFilePath, "txt", _game.GameTime, null, null);
-                        var finalPlayByPlayPath = ExportPlayByPlay(exportFilePath, "txt");
-                        //Export the live files one more time to post the file path
-                        ExportIndex(exportFilePath, "html", _game.GameTime, finalBoxPath, finalPlayByPlayPath);
+                        ExportJson(exportFilePath);
                     }
 
                     //If the auto-close option is selected, then close the game and then the extractor
