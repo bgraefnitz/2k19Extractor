@@ -165,6 +165,13 @@ namespace _2k19Extractor
                         ExportJson(exportFilePath);
                     }
 
+                    //copy file for local backup
+
+                    string backupFileName = "nba2k19stats_" + _game.StartTime.ToString("yyyyMMdd_HHmmss_") + _game.Teams[0].Name + "-" + _game.Teams[1].Name + ".json";
+                    var gameJsonFile = Path.Combine(exportFilePath, "game.json");
+                    var backupFilePath = Path.Combine(exportFilePath, backupFileName);
+                    File.Copy(gameJsonFile, backupFileName);
+
                     //If the auto-close option is selected, then close the game and then the extractor
                     if (chkAutoClose.Checked)
                     {
