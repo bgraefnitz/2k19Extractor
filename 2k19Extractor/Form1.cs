@@ -225,9 +225,9 @@ namespace _2k19Extractor
                 //Adding Away team first so that we can loop through the teams without worrying about Home/Away because Away is always shown first
                 _game.Teams.Clear();
                 //                                              Score                       OnFloor                 Team Name               Num Players               Base Players
-                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C0D5B0, _baseAddress + 0x5B9C7A8, _baseAddress + 0x5141ACC, _baseAddress + 0x5C17530, _baseAddress + 0x5C16788));//num players is base pointer plus DA8
-                //away score could also be 5BFE468 and home 5BFDDE4
-                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C0CEA0, _baseAddress + 0x5B9C7A0, _baseAddress + 0x5140C74, _baseAddress + 0x5C156F8, _baseAddress + 0x5C14950));//num players is base pointer plus DA8
+                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C140B0, _baseAddress + 0x5BA32C0, _baseAddress + 0x514594C, _baseAddress + 0x5C1E030, _baseAddress + 0x5C1D288));//num players is base pointer plus DA8
+                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C139A0, _baseAddress + 0x5BA3278, _baseAddress + 0x5144AF4, _baseAddress + 0x5C1C1F8, _baseAddress + 0x5C1B450));//num players is base pointer plus DA8
+
 
                 foreach (var team in _game.Teams)
                 {
@@ -249,7 +249,7 @@ namespace _2k19Extractor
                 //Get game-level data like quarter and time remaining
                 //Quarter:
                 var quarterBuffer = new byte[2];
-                //This address hold the final score each quarter is offset by 5C from this so we will add 5C for each Quarter
+                //This address hold the final score each quarter is offset by AC from this so we will add AC for each Quarter
                 var quarterAddress = new IntPtr(_game.QuarterPointer);
                 ReadProcessMemory(processHandle, quarterAddress, quarterBuffer, quarterBuffer.Length, out bytesRead);
                 _game.CurrentQuarter = BitConverter.ToInt16(quarterBuffer, 0);
