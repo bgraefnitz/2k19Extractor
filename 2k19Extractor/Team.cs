@@ -13,6 +13,7 @@ namespace _2k19Extractor
         public Int64 NumPlayersPointer;
         public Int64 BasePlayerPointer;
         public Int64 FinalScorePointer;
+        public Int64 DefensiveSettingsPointer;
         public Int64 NamePointer;
         public Int64 PlayersOnFloorPointer;
         public int NumPlayers;
@@ -151,7 +152,7 @@ namespace _2k19Extractor
         }
 
 
-        public Team(string homeAway, Int64 finalScorePointer, Int64 playersOnFloorPointer, Int64 namePointer, Int64 numPlayersPointer, Int64 basePlayerPointer)
+        public Team(string homeAway, Int64 finalScorePointer, Int64 playersOnFloorPointer, Int64 namePointer, Int64 numPlayersPointer, Int64 basePlayerPointer, Int64 defensiveSettingsPointer)
         {
             HomeAway = homeAway;
             FinalScorePointer = finalScorePointer;
@@ -159,6 +160,7 @@ namespace _2k19Extractor
             NamePointer = namePointer;
             NumPlayersPointer = numPlayersPointer;
             BasePlayerPointer = basePlayerPointer;
+            DefensiveSettingsPointer = defensiveSettingsPointer;
             Players = new List<Player>();
             Score = new Score();
             Lineups = new List<Lineup>();

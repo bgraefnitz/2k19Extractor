@@ -224,9 +224,9 @@ namespace _2k19Extractor
                 //Create teams by clearing the team list, designating Home/Away, and supplying the pointer for Number of Players, and Pointer for the starting Center
                 //Adding Away team first so that we can loop through the teams without worrying about Home/Away because Away is always shown first
                 _game.Teams.Clear();
-                //                                              Score                       OnFloor                 Team Name               Num Players               Base Players
-                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C140B0, _baseAddress + 0x5BA32C0, _baseAddress + 0x514594C, _baseAddress + 0x5C1E030, _baseAddress + 0x5C1D288));//num players is base pointer plus DA8
-                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C139A0, _baseAddress + 0x5BA3278, _baseAddress + 0x5144AF4, _baseAddress + 0x5C1C1F8, _baseAddress + 0x5C1B450));//num players is base pointer plus DA8
+                //                                              Score                       OnFloor                 Team Name               Num Players               Base Players             Def Settings
+                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C140B0, _baseAddress + 0x5BA32C0, _baseAddress + 0x514594C, _baseAddress + 0x5C1E030, _baseAddress + 0x5C1D288, _baseAddress + 0x514DF74));//num players is base pointer plus DA8
+                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C139A0, _baseAddress + 0x5BA3278, _baseAddress + 0x5144AF4, _baseAddress + 0x5C1C1F8, _baseAddress + 0x5C1B450, _baseAddress + 0x514DED8));//num players is base pointer plus DA8
 
 
                 foreach (var team in _game.Teams)
@@ -320,6 +320,8 @@ namespace _2k19Extractor
                             player.DynamicPlayerPointer = BitConverter.ToInt64(statBuffer, 0);
                         }
                     }
+                    //Now we'll get settings from the NLL site and set them in the game
+                    var gameSettings = NLL.DataAccessLayer.GetGameSettings(_game.Teams[0].Name, _game.Teams[1].Name);
                     return true;
                 }
                 MessageBox.Show("Please make sure a game setup with 12 minute quarters, is loaded, and start the extractor prior to tipoff!");
