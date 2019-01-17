@@ -7,7 +7,7 @@ namespace _2k19Extractor.NLL
 {
     class GameSettings
     {
-        public List<DefensiveMatchup> AwaySettings;
-        public List<DefensiveMatchup> HomeSettings;
+        public List<DefensiveMatchup> AwaySettings { get; set; }
+        public List<DefensiveMatchup> HomeSettings { get; set; }
     }
 }

@@ -24,7 +24,10 @@ namespace _2k19Extractor
         [DllImport("kernel32.dll")]
             static extern bool ReadProcessMemory(IntPtr hProcess,IntPtr lpBaseAddress,[Out] byte[] lpBuffer,int dwSize,out IntPtr lpNumberOfBytesRead);
 
-        private const int ReadProcessAccessLevel = 0x10;
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, uint nSize, out int lpNumberOfBytesWritten);
+
+        private const int AllProcessAccessLevel = 0x001F0FFF;
 
         private Game _game;
         private Game prevGame;
@@ -216,7 +219,7 @@ namespace _2k19Extractor
                 _baseAddress = (Int64)process.MainModule.BaseAddress;
 
                 //Open the process with read-only access
-                IntPtr processHandle = OpenProcess(ReadProcessAccessLevel, false, process.Id);
+                IntPtr processHandle = OpenProcess(AllProcessAccessLevel, false, process.Id);
 
                 //Declare the game object with the appropriate start time
                 _game = new Game(DateTime.Now,_baseAddress);
@@ -322,6 +325,26 @@ namespace _2k19Extractor
                     }
                     //Now we'll get settings from the NLL site and set them in the game
                     var gameSettings = NLL.DataAccessLayer.GetGameSettings(_game.Teams[0].Name, _game.Teams[1].Name);
+                    foreach(var setting in gameSettings.AwaySettings)
+                    {
+                        //find the opposing player on the home team
+                        var oppPlayer = _game.Teams[1].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.OpposingPlayer);
+                        //find the defender for them
+                        var defPlayer = _game.Teams[0].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.DefendingPlayer);
+                        //set the value at the appropriate slot for the opposing player to the slot number of the defending player
+                        //each opposing player takes up 12 bytes
+                        SetInt(processHandle, _game.Teams[0].DefensiveSettingsPointer, defPlayer.DepthChartPos-1, 12 * (oppPlayer.DepthChartPos-1));
+                    }
+                    foreach (var setting in gameSettings.HomeSettings)
+                    {
+                        //find the opposing player on the home team
+                        var oppPlayer = _game.Teams[0].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.OpposingPlayer);
+                        //find the defender for them
+                        var defPlayer = _game.Teams[1].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.DefendingPlayer);
+                        //set the value at the appropriate slot for the opposing player to the slot number of the defending player
+                        //each opposing player takes up 12 bytes
+                        SetInt(processHandle, _game.Teams[1].DefensiveSettingsPointer, defPlayer.DepthChartPos-1, 12 * (oppPlayer.DepthChartPos-1));
+                    }
                     return true;
                 }
                 MessageBox.Show("Please make sure a game setup with 12 minute quarters, is loaded, and start the extractor prior to tipoff!");
@@ -340,7 +363,7 @@ namespace _2k19Extractor
             if (process != null)
             {
                 //Open the process with read-only access
-                IntPtr processHandle = OpenProcess(ReadProcessAccessLevel, false, process.Id);
+                IntPtr processHandle = OpenProcess(AllProcessAccessLevel, false, process.Id);
 
                 //declare byte read stuff
                 IntPtr bytesRead;
@@ -823,6 +846,16 @@ namespace _2k19Extractor
 
             Properties.Settings.Default.AutoClose = chkAutoClose.Checked;
             Properties.Settings.Default.Save();
+        }
+
+        private int SetInt(IntPtr processHandle, Int64 address, Int32 valueToSet, int offset = 0)
+        {
+            var value = BitConverter.GetBytes(valueToSet);
+            int bytesWritten = 0;
+            var addressPtr = new IntPtr(address + offset);
+            WriteProcessMemory(processHandle, addressPtr, value, 8, out bytesWritten);
+
+            return bytesWritten;
         }
     }
 }

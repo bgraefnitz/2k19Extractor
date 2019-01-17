@@ -14,8 +14,10 @@ namespace _2k19Extractor.NLL
         {
             using (var client = new HttpClient())
             {
-                var content = client.GetStringAsync("http://nbaliveleague.com/svc/game_data.php?homeTeam=Bkn&awayTeam=Atl").Result;
-                return JsonConvert.DeserializeObject<GameSettings>(content);
+                var uri = "http://nbaliveleague.com/svc/game_data.php?homeTeam=" + homeTeam + "&awayTeam=" + awayTeam;
+                var content = client.GetStringAsync(uri).Result;
+                var gameSettings = JsonConvert.DeserializeObject<GameSettings>(content);
+                return gameSettings;
             }
         }
     }
