@@ -4,16 +4,28 @@
     <CheatEntry>
       <ID>1</ID>
       <Description>"No description"</Description>
-      <LastState Value="4294967295" RealAddress="7FF7BF9BDED8"/>
       <VariableType>4 Bytes</VariableType>
       <Address>NBA2K19.exe+514DED8</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>5</ID>
       <Description>"No description"</Description>
-      <LastState Value="4294967295" RealAddress="7FF7BF9BDF74"/>
       <VariableType>4 Bytes</VariableType>
       <Address>NBA2K19.exe+514DF74</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"No description"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NBA2K19.exe+514DEE4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"No description"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NBA2K19.exe+514DEFC</Address>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
