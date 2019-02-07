@@ -3,249 +3,322 @@
   <CheatEntries>
     <CheatEntry>
       <ID>0</ID>
-      <Description>"No description"</Description>
-      <VariableType>String</VariableType>
-      <Length>6</Length>
-      <Unicode>1</Unicode>
-      <CodePage>0</CodePage>
-      <ZeroTerminate>1</ZeroTerminate>
-      <Address>7FF42D321190</Address>
+      <Description>"time"</Description>
+      <LastState Value="0" RealAddress="7FF6901A0AF0"/>
+      <VariableType>2 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C30AF0</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>1</ID>
-      <Description>"No description"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>nba2k19.exe+5BF1990</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>2</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+513C840</Address>
+      <Description>"home score"</Description>
+      <LastState Value="0" RealAddress="7FF690199B10"/>
+      <VariableType>2 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C29B10</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>3</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+513C910</Address>
+      <Description>"away score"</Description>
+      <LastState Value="0" RealAddress="7FF69019A220"/>
+      <VariableType>2 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C2A220</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>4</ID>
       <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+513D168</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>5</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+513D1E0</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>13</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+513D5E8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>14</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+513D6B8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>15</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+513DF10</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>16</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+513DF88</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>6</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C092C8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>7</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+526A8E8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>9</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C092C8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>10</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C092F0</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>11</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C13390</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>17</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C11558</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>12</ID>
-      <Description>"No description"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>00007FF4039477D0</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>18</ID>
-      <Description>"No description"</Description>
+      <LastState RealAddress="7FF45364DD50"/>
       <VariableType>String</VariableType>
       <Length>5</Length>
       <Unicode>1</Unicode>
       <CodePage>0</CodePage>
       <ZeroTerminate>1</ZeroTerminate>
-      <Address>NBA2K19.exe+513CAF4</Address>
+      <Address>7FF45364DD50</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="7FF4BEAF3D80"/>
+      <VariableType>String</VariableType>
+      <Length>5</Length>
+      <Unicode>1</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>00007FF4BEAF3D80</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"No description"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF6901A15C0"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C315C0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"No description"</Description>
+      <LastState Value="613566756" RealAddress="7FF45364EC50"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>00007FF45364EC50</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"No description"</Description>
+      <LastState Value="613566756" RealAddress="7FF45364E250"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>00007FF45364E250</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="7FF450B352D0"/>
+      <VariableType>String</VariableType>
+      <Length>4</Length>
+      <Unicode>1</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>7FF450B352D0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="7FF450B35780"/>
+      <VariableType>String</VariableType>
+      <Length>4</Length>
+      <Unicode>1</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>7FF450B35780</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"No description"</Description>
+      <LastState Value="4E4E4E4E00000000" RealAddress="7FF4BEAF3D80"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>00007FF4BEAF3D80</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF68DFF3000"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+3A83000</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF68DFF99E0"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+3A899E0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF690129498"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5BB9498</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF6901383D0"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5BC83D0</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>19</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF690199A90"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C29A90</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF690199B00"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C29B00</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF69019AE38"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C2AE38</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF6901A5270"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C35270</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF6901B9C70"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C49C70</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF6901D0818"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C60818</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF6901D0B58"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C60B58</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF6901D9958"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C69958</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"player with ball?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF6901D9CC0"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C69CC0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>28</ID>
       <Description>"No description"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF690177A48"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C07A48</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>29</ID>
+      <Description>"No description"</Description>
+      <LastState Value="4398151D00000000" RealAddress="7FF4BEC32770"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>7FF4BEC32770</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>30</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="7FF68F6CBABC"/>
       <VariableType>String</VariableType>
       <Length>7</Length>
       <Unicode>1</Unicode>
       <CodePage>0</CodePage>
       <ZeroTerminate>1</ZeroTerminate>
-      <Address>NBA2K19.exe+513D94C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>20</ID>
-      <Description>"No description"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>7FF403947C80</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>21</ID>
-      <Description>"No description"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>00007FF46F8295A0</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>22</ID>
-      <Description>"home on floor"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>7FF46F7EF580</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>23</ID>
-      <Description>"No description"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>nba2k19.exe+5134180</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>24</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+5B985B0</Address>
-      <Offsets>
-        <Offset>160</Offset>
-      </Offsets>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>26</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C0FD20</Address>
-      <Offsets>
-        <Offset>160</Offset>
-      </Offsets>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>27</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C102D8</Address>
-      <Offsets>
-        <Offset>160</Offset>
-      </Offsets>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>28</ID>
-      <Description>"No description"</Description>
-      <VariableType>2 Bytes</VariableType>
-      <Address>00007FF64E7C1440</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>29</ID>
-      <Description>"No description"</Description>
-      <VariableType>2 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C09430</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>30</ID>
-      <Description>"No description"</Description>
-      <VariableType>2 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C08D20</Address>
+      <Address>NBA2K19.exe+515BABC</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>31</ID>
       <Description>"No description"</Description>
-      <VariableType>2 Bytes</VariableType>
-      <Address>NBA2K19.exe+5152F80</Address>
+      <LastState RealAddress="7FF68F6CAC64"/>
+      <VariableType>String</VariableType>
+      <Length>7</Length>
+      <Unicode>1</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>NBA2K19.exe+515AC64</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>32</ID>
       <Description>"No description"</Description>
+      <LastState Value="1" RealAddress="7FF68F6E10F0"/>
       <VariableType>2 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C0FCDC</Address>
+      <Address>NBA2K19.exe+51710F0</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>33</ID>
       <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+5B985B0</Address>
+      <LastState Value="0" RealAddress="7FF6901A0AEC"/>
+      <VariableType>2 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C30AEC</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>34</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C0FD20</Address>
+      <Address>NBA2K19.exe+5BB9440</Address>
+      <Offsets>
+        <Offset>160</Offset>
+      </Offsets>
     </CheatEntry>
     <CheatEntry>
       <ID>35</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>8 Bytes</VariableType>
-      <Address>NBA2K19.exe+5C102D8</Address>
+      <Address>NBA2K19.exe+5BB9448</Address>
+      <Offsets>
+        <Offset>160</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>36</ID>
+      <Description>"home in game"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF6901A10C0"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C310C0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>37</ID>
+      <Description>"home in game"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF6901A10E8"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C310E8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>41</ID>
+      <Description>"home in game?"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF690129440"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5BB9440</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>38</ID>
+      <Description>"away in game"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF690129448"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5BB9448</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>39</ID>
+      <Description>"away in game"</Description>
+      <LastState Value="0000000000000000" RealAddress="7FF6901A10F0"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+5C310F0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>40</ID>
+      <Description>"away in game?"</Description>
+      <LastState Value="00007FF4BEC32610" RealAddress="7FF68E753070"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>8 Bytes</VariableType>
+      <Address>NBA2K19.exe+41E3070</Address>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
