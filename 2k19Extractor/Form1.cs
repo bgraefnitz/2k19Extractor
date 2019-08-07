@@ -24,7 +24,10 @@ namespace _2k19Extractor
         [DllImport("kernel32.dll")]
             static extern bool ReadProcessMemory(IntPtr hProcess,IntPtr lpBaseAddress,[Out] byte[] lpBuffer,int dwSize,out IntPtr lpNumberOfBytesRead);
 
-        private const int ReadProcessAccessLevel = 0x10;
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, uint nSize, out int lpNumberOfBytesWritten);
+
+        private const int AllProcessAccessLevel = 0x001F0FFF;
 
         private Game _game;
         private Game prevGame;
@@ -216,7 +219,7 @@ namespace _2k19Extractor
                 _baseAddress = (Int64)process.MainModule.BaseAddress;
 
                 //Open the process with read-only access
-                IntPtr processHandle = OpenProcess(ReadProcessAccessLevel, false, process.Id);
+                IntPtr processHandle = OpenProcess(AllProcessAccessLevel, false, process.Id);
 
                 //Declare the game object with the appropriate start time
                 _game = new Game(DateTime.Now,_baseAddress);
@@ -224,6 +227,7 @@ namespace _2k19Extractor
                 //Create teams by clearing the team list, designating Home/Away, and supplying the pointer for Number of Players, and Pointer for the starting Center
                 //Adding Away team first so that we can loop through the teams without worrying about Home/Away because Away is always shown first
                 _game.Teams.Clear();
+                
                 //                                              Score                       OnFloor                 Team Name               Num Players               Base Players
                 _game.Teams.Add(new Team("Away", _baseAddress + 0x5C2A220, _baseAddress + 0x5BB9448, _baseAddress + 0x515BABC, _baseAddress + 0x5C341A0, _baseAddress + 0x5C333F8));//num players is base pointer plus DA8
                 _game.Teams.Add(new Team("Home", _baseAddress + 0x5C29B10, _baseAddress + 0x5BB9440, _baseAddress + 0x515AC64, _baseAddress + 0x5C32368, _baseAddress + 0x5C315C0));//num players is base pointer plus DA8
@@ -320,6 +324,28 @@ namespace _2k19Extractor
                             player.DynamicPlayerPointer = BitConverter.ToInt64(statBuffer, 0);
                         }
                     }
+                    //Now we'll get settings from the NLL site and set them in the game
+                    var gameSettings = NLL.DataAccessLayer.GetGameSettings(_game.Teams[0].Name, _game.Teams[1].Name);
+                    foreach(var setting in gameSettings.AwaySettings)
+                    {
+                        //find the opposing player on the home team
+                        var oppPlayer = _game.Teams[1].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.OpposingPlayer);
+                        //find the defender for them
+                        var defPlayer = _game.Teams[0].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.DefendingPlayer);
+                        //set the value at the appropriate slot for the opposing player to the slot number of the defending player
+                        //each opposing player takes up 12 bytes
+                        SetInt(processHandle, _game.Teams[0].DefensiveSettingsPointer, defPlayer.DepthChartPos-1, 12 * (oppPlayer.DepthChartPos-1));
+                    }
+                    foreach (var setting in gameSettings.HomeSettings)
+                    {
+                        //find the opposing player on the home team
+                        var oppPlayer = _game.Teams[0].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.OpposingPlayer);
+                        //find the defender for them
+                        var defPlayer = _game.Teams[1].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.DefendingPlayer);
+                        //set the value at the appropriate slot for the opposing player to the slot number of the defending player
+                        //each opposing player takes up 12 bytes
+                        SetInt(processHandle, _game.Teams[1].DefensiveSettingsPointer, defPlayer.DepthChartPos-1, 12 * (oppPlayer.DepthChartPos-1));
+                    }
                     return true;
                 }
                 MessageBox.Show("Please make sure a game setup with 12 minute quarters, is loaded, and start the extractor prior to tipoff!");
@@ -338,7 +364,7 @@ namespace _2k19Extractor
             if (process != null)
             {
                 //Open the process with read-only access
-                IntPtr processHandle = OpenProcess(ReadProcessAccessLevel, false, process.Id);
+                IntPtr processHandle = OpenProcess(AllProcessAccessLevel, false, process.Id);
 
                 //declare byte read stuff
                 IntPtr bytesRead;
@@ -821,6 +847,16 @@ namespace _2k19Extractor
 
             Properties.Settings.Default.AutoClose = chkAutoClose.Checked;
             Properties.Settings.Default.Save();
+        }
+
+        private int SetInt(IntPtr processHandle, Int64 address, Int32 valueToSet, int offset = 0)
+        {
+            var value = BitConverter.GetBytes(valueToSet);
+            int bytesWritten = 0;
+            var addressPtr = new IntPtr(address + offset);
+            WriteProcessMemory(processHandle, addressPtr, value, 8, out bytesWritten);
+
+            return bytesWritten;
         }
     }
 }
