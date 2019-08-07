@@ -229,8 +229,8 @@ namespace _2k19Extractor
                 _game.Teams.Clear();
                 
                 //                                              Score                       OnFloor                 Team Name               Num Players               Base Players
-                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C2A220, _baseAddress + 0x5BB9448, _baseAddress + 0x515BABC, _baseAddress + 0x5C341A0, _baseAddress + 0x5C333F8));//num players is base pointer plus DA8
-                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C29B10, _baseAddress + 0x5BB9440, _baseAddress + 0x515AC64, _baseAddress + 0x5C32368, _baseAddress + 0x5C315C0));//num players is base pointer plus DA8
+                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C2A220, _baseAddress + 0x5BB9448, _baseAddress + 0x515BABC, _baseAddress + 0x5C341A0, _baseAddress + 0x5C333F8, _baseAddress + 0x5163A64));//num players is base pointer plus DA8
+                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C29B10, _baseAddress + 0x5BB9440, _baseAddress + 0x515AC64, _baseAddress + 0x5C32368, _baseAddress + 0x5C315C0, _baseAddress + 0x51639C8));//num players is base pointer plus DA8
 
 
                 foreach (var team in _game.Teams)
