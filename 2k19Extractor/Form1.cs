@@ -64,7 +64,28 @@ namespace _2k19Extractor
                 new Offset("PointsOffTurnovers", 24090, StatDataType.TwoByteInt),
                 new Offset("Dunks", 24112, StatDataType.TwoByteInt)
             };
-        
+
+        readonly List<Offset> _strategyOffsets = new List<Offset>
+            {
+                new Offset("OnBallPressure", 0, StatDataType.BitRange,0,3),
+                new Offset("OffBallPressure", 0, StatDataType.BitRange,3,3),
+                new Offset("ForceDirection", 0, StatDataType.BitRange,6,2),
+                new Offset("OnBallScreen", 1, StatDataType.BitRange,0,3),
+                new Offset("Hedge", 1, StatDataType.BitRange,3,3),
+                new Offset("OffBallScreen", 1, StatDataType.BitRange,6,2),
+                new Offset("Post", 2, StatDataType.BitRange,0,3),
+                new Offset("DoubleTeamPerimeter", 2, StatDataType.BitRange,3,2),
+                new Offset("DoubleTeamPost", 2, StatDataType.BitRange,5,3),
+                new Offset("OnBallScreenCenter", 3, StatDataType.BitRange,0,3),
+                new Offset("HedgeCenter", 3, StatDataType.BitRange,3,3),
+                new Offset("DriveHelpRules", 4, StatDataType.BitRange,0,2),
+                new Offset("ScreenHelpRules", 4, StatDataType.BitRange,2,2),
+                new Offset("ExtendPressure", 4, StatDataType.BitRange,4,2),
+                new Offset("StayAttached", 5, StatDataType.BitRange,0,2),
+                new Offset("PreRotate", 5, StatDataType.BitRange,2,1),
+                new Offset("Defender", 8, StatDataType.FourByteInt)
+            };
+
         //format string for box score (player stats)
         private const string FormatString =
             "{0,-36}{1,8}{2,8}{3,8}{4,8}{5,8}{6,8}{7,8}{8,8}{9,8}{10,8}{11,8}{12,8}{13,8}{14,8}{15,8}{16,8}{17,8}{18,8}{19,8}{20,8}{21,8}{22,8}";
@@ -228,9 +249,9 @@ namespace _2k19Extractor
                 //Adding Away team first so that we can loop through the teams without worrying about Home/Away because Away is always shown first
                 _game.Teams.Clear();
                 
-                //                                              Score                       OnFloor                 Team Name               Num Players               Base Players
-                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C2A220, _baseAddress + 0x5BB9448, _baseAddress + 0x515BABC, _baseAddress + 0x5C341A0, _baseAddress + 0x5C333F8, _baseAddress + 0x5163A64));//num players is base pointer plus DA8
-                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C29B10, _baseAddress + 0x5BB9440, _baseAddress + 0x515AC64, _baseAddress + 0x5C32368, _baseAddress + 0x5C315C0, _baseAddress + 0x51639C8));//num players is base pointer plus DA8
+                //                                              Score                       OnFloor                 Team Name               Num Players               Base Players               Def Settings
+                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C29BA0, _baseAddress + 0x5BB8DC8, _baseAddress + 0x515B43C, _baseAddress + 0x5C33B20, _baseAddress + 0x5C32D78, _baseAddress + 0x5163A64));//num players is base pointer plus DA8
+                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C29490, _baseAddress + 0x5BB8DC0, _baseAddress + 0x515A5E4, _baseAddress + 0x5C32368, _baseAddress + 0x5C30F40, _baseAddress + 0x51639C8));//num players is base pointer plus DA8
 
 
                 foreach (var team in _game.Teams)

@@ -31,4 +31,8 @@ strategy is 8 bytes before defensive matchup
 1-2 bits stay attached 
 3 bit pre-rotate
 
+2 blank bytes
+
+4 byte int of defender
+
 OTHER - SWITCH RULES seems hard-coded to auto?

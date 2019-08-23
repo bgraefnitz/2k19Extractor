@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="27">
+<CheatTable CheatEngineTableVersion="26">
   <CheatEntries>
     <CheatEntry>
       <ID>1</ID>
       <Description>"No description"</Description>
       <VariableType>4 Bytes</VariableType>
-      <Address>NBA2K19.exe+514DED8</Address>
+      <Address>NBA2K19.exe+5163A64</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>5</ID>
       <Description>"No description"</Description>
       <VariableType>4 Bytes</VariableType>
-      <Address>NBA2K19.exe+514DF74</Address>
+      <Address>NBA2K19.exe+51639C8</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>6</ID>
