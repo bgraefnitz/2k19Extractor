@@ -5,27 +5,25 @@
       <ID>1</ID>
       <Description>"No description"</Description>
       <VariableType>4 Bytes</VariableType>
+      <Address>NBA2K19.exe+5163A5C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"No description"</Description>
+      <VariableType>4 Bytes</VariableType>
       <Address>NBA2K19.exe+5163A64</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"No description"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NBA2K19.exe+51639C0</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>5</ID>
       <Description>"No description"</Description>
       <VariableType>4 Bytes</VariableType>
       <Address>NBA2K19.exe+51639C8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>6</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>NBA2K19.exe+514DEE4</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>7</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>NBA2K19.exe+514DEFC</Address>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>

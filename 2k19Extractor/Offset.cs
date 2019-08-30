@@ -6,12 +6,16 @@
         public string Name;
         public int OffsetInt;
         public StatDataType Type;
+        public int StartingBit;
+        public int BitLength;
 
-        public Offset(string name, int offsetInt, StatDataType type)
+        public Offset(string name, int offsetInt, StatDataType type, int startingBit = 0, int bitLength = 0)
         {
             Name = name;
             OffsetInt = offsetInt;
             Type = type;
+            StartingBit = startingBit;
+            BitLength = bitLength;
         }
     }
 }

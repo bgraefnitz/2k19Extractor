@@ -11,7 +11,8 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Threading;
-
+using _2k19Extractor.NLL;
+using System.Collections;
 
 namespace _2k19Extractor
 {
@@ -74,16 +75,16 @@ namespace _2k19Extractor
                 new Offset("Hedge", 1, StatDataType.BitRange,3,3),
                 new Offset("OffBallScreen", 1, StatDataType.BitRange,6,2),
                 new Offset("Post", 2, StatDataType.BitRange,0,3),
-                new Offset("DoubleTeamPerimeter", 2, StatDataType.BitRange,3,2),
-                new Offset("DoubleTeamPost", 2, StatDataType.BitRange,5,3),
+                new Offset("DoublePerimeter", 2, StatDataType.BitRange,3,2),
+                new Offset("DoublePost", 2, StatDataType.BitRange,5,3),
                 new Offset("OnBallScreenCenter", 3, StatDataType.BitRange,0,3),
                 new Offset("HedgeCenter", 3, StatDataType.BitRange,3,3),
-                new Offset("DriveHelpRules", 4, StatDataType.BitRange,0,2),
-                new Offset("ScreenHelpRules", 4, StatDataType.BitRange,2,2),
+                new Offset("DriveHelp", 4, StatDataType.BitRange,0,2),
+                new Offset("ScreenHelp", 4, StatDataType.BitRange,2,2),
                 new Offset("ExtendPressure", 4, StatDataType.BitRange,4,2),
                 new Offset("StayAttached", 5, StatDataType.BitRange,0,2),
                 new Offset("PreRotate", 5, StatDataType.BitRange,2,1),
-                new Offset("Defender", 8, StatDataType.FourByteInt)
+                new Offset("DefendingPlayer", 8, StatDataType.FourByteInt)
             };
 
         //format string for box score (player stats)
@@ -250,8 +251,8 @@ namespace _2k19Extractor
                 _game.Teams.Clear();
                 
                 //                                              Score                       OnFloor                 Team Name               Num Players               Base Players               Def Settings
-                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C29BA0, _baseAddress + 0x5BB8DC8, _baseAddress + 0x515B43C, _baseAddress + 0x5C33B20, _baseAddress + 0x5C32D78, _baseAddress + 0x5163A64));//num players is base pointer plus DA8
-                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C29490, _baseAddress + 0x5BB8DC0, _baseAddress + 0x515A5E4, _baseAddress + 0x5C32368, _baseAddress + 0x5C30F40, _baseAddress + 0x51639C8));//num players is base pointer plus DA8
+                _game.Teams.Add(new Team("Away", _baseAddress + 0x5C29BA0, _baseAddress + 0x5BB8DC8, _baseAddress + 0x515B43C, _baseAddress + 0x5C33B20, _baseAddress + 0x5C32D78, _baseAddress + 0x5163A5C));//num players is base pointer plus DA8
+                _game.Teams.Add(new Team("Home", _baseAddress + 0x5C29490, _baseAddress + 0x5BB8DC0, _baseAddress + 0x515A5E4, _baseAddress + 0x5C31CE8, _baseAddress + 0x5C30F40, _baseAddress + 0x51639C0));//num players is base pointer plus DA8
 
 
                 foreach (var team in _game.Teams)
@@ -347,26 +348,10 @@ namespace _2k19Extractor
                     }
                     //Now we'll get settings from the NLL site and set them in the game
                     var gameSettings = NLL.DataAccessLayer.GetGameSettings(_game.Teams[0].Name, _game.Teams[1].Name);
-                    foreach(var setting in gameSettings.AwaySettings)
-                    {
-                        //find the opposing player on the home team
-                        var oppPlayer = _game.Teams[1].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.OpposingPlayer);
-                        //find the defender for them
-                        var defPlayer = _game.Teams[0].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.DefendingPlayer);
-                        //set the value at the appropriate slot for the opposing player to the slot number of the defending player
-                        //each opposing player takes up 12 bytes
-                        SetInt(processHandle, _game.Teams[0].DefensiveSettingsPointer, defPlayer.DepthChartPos-1, 12 * (oppPlayer.DepthChartPos-1));
-                    }
-                    foreach (var setting in gameSettings.HomeSettings)
-                    {
-                        //find the opposing player on the home team
-                        var oppPlayer = _game.Teams[0].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.OpposingPlayer);
-                        //find the defender for them
-                        var defPlayer = _game.Teams[1].Players.FirstOrDefault(p => p.FullName.ToLower() == setting.DefendingPlayer);
-                        //set the value at the appropriate slot for the opposing player to the slot number of the defending player
-                        //each opposing player takes up 12 bytes
-                        SetInt(processHandle, _game.Teams[1].DefensiveSettingsPointer, defPlayer.DepthChartPos-1, 12 * (oppPlayer.DepthChartPos-1));
-                    }
+                    foreach(var opponentSettings in gameSettings.AwaySettings)
+                        MapSettingsToInGamePlayer(processHandle,_game.Teams[0], _game.Teams[1], opponentSettings);
+                    foreach (var opponentSettings in gameSettings.HomeSettings)
+                        MapSettingsToInGamePlayer(processHandle, _game.Teams[1], _game.Teams[0], opponentSettings);
                     return true;
                 }
                 MessageBox.Show("Please make sure a game setup with 12 minute quarters, is loaded, and start the extractor prior to tipoff!");
@@ -375,6 +360,48 @@ namespace _2k19Extractor
             MessageBox.Show("NBA 2k19 Isn't Even Open!!");
             return false;
         }
+
+        private void MapSettingsToInGamePlayer(IntPtr processHandle, Team team, Team oppTeam, DefensiveMatchup opponentSettings)
+        {
+            //get opposing player and if found set all strategy settings
+            var oppPlayer = oppTeam.Players.FirstOrDefault(p => p.FullName.ToLower() == opponentSettings.OpposingPlayer);
+            //TODO: change to a null check on oppPlayer if rosters are solid enough that we can use this as validation that the correct rosters are being used
+            if (oppPlayer == null)
+                return;
+
+            foreach(var offset in _strategyOffsets)
+            {
+                var valueObject = opponentSettings.GetType().GetProperty(offset.Name).GetValue(opponentSettings);
+                if(offset.Name == "DefendingPlayer")
+                {
+                    if(valueObject != null)
+                    {
+                        var defPlayer = team.Players.FirstOrDefault(p => p.FullName.ToLower() == opponentSettings.DefendingPlayer);
+                        SetInt(processHandle, team.DefensiveSettingsPointer, defPlayer.DepthChartPos - 1, offset.OffsetInt + 12 * (oppPlayer.DepthChartPos - 1));
+                    }
+                }
+                else
+                {
+                    var value = Convert.ToInt32(valueObject);
+                    SetBitsInInt(processHandle, team.DefensiveSettingsPointer, 1, offset.StartingBit, offset.BitLength, value, offset.OffsetInt + 12 * (oppPlayer.DepthChartPos - 1));
+                }
+            }
+
+            //somewhat working defender set below
+            //TODO: put all object to game/offset logic here
+            /*
+            if (defPlayer != null)
+            {
+                var defenderSetting = _strategyOffsets.Where(o => o.Name == "Defender").FirstOrDefault();
+                SetInt(processHandle, _game.Teams[0].DefensiveSettingsPointer, defPlayer.DepthChartPos - 1, defenderSetting.OffsetInt + 12 * (oppPlayer.DepthChartPos - 1));
+            }
+            else
+            {
+                //var settingValue = opponentSettings.
+                //SetInt(processHandle, _game.Teams[0].DefensiveSettingsPointer, 11, setting.OffsetInt + 12 * (oppPlayer.DepthChartPos - 1));
+            }
+            */
+    }
 
         private void GetStats(Game prevGame)
         {
@@ -878,6 +905,59 @@ namespace _2k19Extractor
             WriteProcessMemory(processHandle, addressPtr, value, 8, out bytesWritten);
 
             return bytesWritten;
+        }
+
+        /// <summary>
+        /// this method gets the range of bytes, changes the specific bits within them and then sets those bytes to the end result
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="numBytes"></param>
+        /// <param name="startBit"></param>
+        /// <param name="numBits"></param>
+        /// <param name="valueToSet"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        private int SetBitsInInt(IntPtr processHandle, Int64 address, int numBytes, int startBit, int numBits, int valueToSet, int offset = 0)
+        {
+            var buffer = new byte[numBytes];
+            IntPtr bytesRead;
+            var addressPtr = new IntPtr(address + offset);
+            ReadProcessMemory(processHandle, addressPtr, buffer, buffer.Length, out bytesRead);
+            var bitArray = new BitArray(buffer);
+
+            int[] valueToSetArray = new int[] { valueToSet };
+
+            //get the bits for the value, then inject them into the bit array
+            var setValueBitArray = new BitArray(valueToSetArray);
+
+            //where we start in the value bit array it is the number of bytes times 8 and then subtract the number of bits expected. 
+            //This is because if something is expected to have 6 bytes we don't want to set the first 2 (that are expected to be zero) and then the next 4 - we want to set the last 6
+
+            for (int setValueBit = 0; setValueBit < numBits; setValueBit++)
+            {
+                var bitNumberInBytes = startBit + setValueBit;
+                bitArray[bitNumberInBytes] = setValueBitArray[setValueBit];
+            }
+            var intValue = BitArrayToInt(bitArray, 0, bitArray.Length);
+            var setByteValue = BitConverter.GetBytes(intValue);
+            int bytesWritten = 0;
+            WriteProcessMemory(processHandle, addressPtr, setByteValue, (uint)numBytes, out bytesWritten);
+
+            return bytesWritten;
+        }
+
+        private int BitArrayToInt(BitArray bitArray, int startBit, int numBits)
+        {
+            int value;
+            BitArray newBitArray = new BitArray(numBits);
+            for (int x = 0; x < numBits; x++)
+            {
+                newBitArray[x] = bitArray[startBit + x];
+            }
+            int[] array = new int[1];
+            newBitArray.CopyTo(array, 0);
+            value = array[0];
+            return value;
         }
     }
 }

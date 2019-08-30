@@ -31,8 +31,11 @@ strategy is 8 bytes before defensive matchup
 1-2 bits stay attached 
 3 bit pre-rotate
 
+7,8
 2 blank bytes
 
+9-12
 4 byte int of defender
 
 OTHER - SWITCH RULES seems hard-coded to auto?
+OFF-BALL SCREEN (Center) isn't even a thing in the game?
