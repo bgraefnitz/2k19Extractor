@@ -386,21 +386,6 @@ namespace _2k19Extractor
                     SetBitsInInt(processHandle, team.DefensiveSettingsPointer, 1, offset.StartingBit, offset.BitLength, value, offset.OffsetInt + 12 * (oppPlayer.DepthChartPos - 1));
                 }
             }
-
-            //somewhat working defender set below
-            //TODO: put all object to game/offset logic here
-            /*
-            if (defPlayer != null)
-            {
-                var defenderSetting = _strategyOffsets.Where(o => o.Name == "Defender").FirstOrDefault();
-                SetInt(processHandle, _game.Teams[0].DefensiveSettingsPointer, defPlayer.DepthChartPos - 1, defenderSetting.OffsetInt + 12 * (oppPlayer.DepthChartPos - 1));
-            }
-            else
-            {
-                //var settingValue = opponentSettings.
-                //SetInt(processHandle, _game.Teams[0].DefensiveSettingsPointer, 11, setting.OffsetInt + 12 * (oppPlayer.DepthChartPos - 1));
-            }
-            */
     }
 
         private void GetStats(Game prevGame)
