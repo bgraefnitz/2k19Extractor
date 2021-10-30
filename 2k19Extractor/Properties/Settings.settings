@@ -11,5 +11,8 @@
     <Setting Name="AutoClose" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="GameDataServiceUri" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nbaliveleague.com/svc/game_data.php</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -14,7 +14,8 @@ namespace _2k19Extractor.NLL
         {
             using (var client = new HttpClient())
             {
-                var uri = "http://nbaliveleague.com/svc/game_data.php?homeTeam=" + homeTeam + "&awayTeam=" + awayTeam;
+                var baseUri = Properties.Settings.Default.GameDataServiceUri;
+                var uri = baseUri + "?homeTeam=" + homeTeam + "&awayTeam=" + awayTeam;
                 var content = client.GetStringAsync(uri).Result;
                 var gameSettings = JsonConvert.DeserializeObject<GameSettings>(content);
                 return gameSettings;
